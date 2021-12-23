@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+
+    <changeSet id="0001" author="oliveira.gabriel">
+        <createTable tableName="rebelde">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="nome" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="idade" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="genero" type="varchar(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="latitude" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="longitude" type="double">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome_galaxia" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="traidor" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence incrementBy="1" ordered="true" schemaName="public"
+                        sequenceName="rebelde_sequence" startValue="0" />
+    </changeSet>
+
+    <changeSet id="0002" author="oliveira.gabriel">
+        <createTable tableName="traidor">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="rebelde_id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="rebelde_traidor_id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+
+        <createSequence incrementBy="1" ordered="true" schemaName="public"
+                        sequenceName="traidor_sequence" startValue="0" />
+    </changeSet>
+
+    <changeSet  id="0003" author="oliveira.gabriel">
+        <addForeignKeyConstraint baseColumnNames="rebelde_id"
+                                 baseTableName="traidor"
+                                 constraintName="fk_rebelde_delator"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rebelde"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+
+        <addForeignKeyConstraint baseColumnNames="rebelde_traidor_id"
+                                 baseTableName="traidor"
+                                 constraintName="fk_rebelde_traidor"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rebelde"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+
+    <changeSet id="0004" author="oliveira.gabriel">
+        <createTable tableName="item_inventario">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="rebelde_id" type="bigint"/>
+            <column name="codigo_item" type="smallint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pontos" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantidade" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence incrementBy="1" ordered="true" schemaName="public"
+                        sequenceName="item_inventario_seq" startValue="0" />
+    </changeSet>
+
+    <changeSet  id="0005" author="oliveira.gabriel">
+        <addForeignKeyConstraint baseColumnNames="rebelde_id"
+                                 baseTableName="item_inventario"
+                                 constraintName="fk_rebelde_inventario"
+                                 referencedColumnNames="id"
+                                 referencedTableName="rebelde"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"/>
+    </changeSet>
+</databaseChangeLog>
