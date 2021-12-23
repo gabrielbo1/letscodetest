@@ -20,7 +20,7 @@ public class TraidorRepositorioImp implements TraidorRepositorio {
     private TraidorEntidade parsing = new TraidorEntidade();
 
     @Override
-    public void Salvar(Traidor traidor) {
+    public void salvar(Traidor traidor) {
         traidorEntidadeRepositorio.save(parsing.dominioEntidade(traidor));
     }
 

@@ -85,7 +85,7 @@ public class RebeldeCase implements RebeldeUseCase {
         }
 
         Traidor traidor = new Traidor(registroDelator.get(), registroTraidor.get());
-        traidorRepositorio.Salvar(traidor);
+        traidorRepositorio.salvar(traidor);
 
         if (!registroTraidor.get().getTraidor()) {
             List<Traidor> votos = traidorRepositorio.buscarListaVotos(registroTraidor.get());

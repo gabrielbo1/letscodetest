@@ -6,6 +6,6 @@ import br.com.letscode.starwarsnetwork.core.domain.Traidor;
 import java.util.List;
 
 public interface TraidorRepositorio {
-    void Salvar(Traidor traidor);
+    void salvar(Traidor traidor);
     List<Traidor> buscarListaVotos(Rebelde traidor);
 }
